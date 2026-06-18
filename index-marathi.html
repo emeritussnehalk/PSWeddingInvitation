@@ -603,6 +603,14 @@
       border-color: rgba(255,255,255,0.3);
     }
 
+    .btn.is-locked,
+    .btn.gold.is-locked {
+      cursor: not-allowed;
+      filter: saturate(0.62) brightness(0.96);
+      opacity: 0.68;
+      box-shadow: 0 8px 20px rgba(95, 51, 141, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    }
+
     .icon-btn {
       width: 42px;
       height: 42px;
@@ -3795,17 +3803,15 @@
       position: relative;
       inset: auto;
       min-height: 100%;
-      gap: 7px;
-      padding: 11px 11px 9px;
+      grid-template-rows: auto auto auto;
+      align-content: start;
+      gap: 10px;
+      padding: 12px 16px 12px;
       overflow: hidden;
     }
 
     .function-face::before {
-      inset: 18px 14px 14px;
-      z-index: 0;
-      border-color: rgba(201, 164, 74, 0.34);
-      border-radius: 20px;
-      box-shadow: inset 0 0 18px rgba(142, 104, 191, 0.05);
+      display: none;
     }
 
     .function-face::after {
@@ -3836,20 +3842,30 @@
     }
 
     .function-title {
-      font-size: clamp(1.36rem, 5.15vmin, 1.74rem);
+      font-size: clamp(1.52rem, 5.7vmin, 1.96rem);
       line-height: 0.98;
     }
 
     .function-main {
-      grid-template-columns: 88px minmax(0, 1fr);
-      gap: 8px;
-      align-items: stretch;
+      grid-template-columns: 92px minmax(0, 1fr);
+      grid-template-rows: auto auto auto;
+      grid-template-areas:
+        "copy copy"
+        "poem poem"
+        "pose summary";
+      column-gap: 8px;
+      row-gap: 8px;
+      align-items: start;
+      align-content: start;
       overflow: visible;
     }
 
     .function-pose {
+      grid-area: pose;
       aspect-ratio: 0.67;
       max-height: 138px;
+      align-self: start;
+      margin-top: 0;
       border-radius: 16px;
       background:
         radial-gradient(circle at 50% 16%, rgba(95, 51, 141, 0.18), transparent 54%),
@@ -3857,14 +3873,15 @@
     }
 
     .function-summary {
+      grid-area: summary;
       display: grid;
-      align-content: stretch;
+      align-content: start;
       gap: 5px;
       min-height: 0;
-      height: 100%;
+      height: auto;
       overflow: visible;
       padding-right: 0;
-      grid-template-rows: auto auto minmax(0, 1fr);
+      grid-template-rows: auto;
     }
 
     .story-stage-title,
@@ -3890,12 +3907,17 @@
     }
 
     .function-copy {
+      grid-area: copy;
+      margin: 0;
+      width: 100%;
+      max-width: none;
       display: block;
       overflow: visible;
       -webkit-line-clamp: unset;
-      font-size: clamp(0.88rem, 3.35vmin, 1rem);
-      line-height: 1.26;
+      font-size: clamp(0.96rem, 3.65vmin, 1.12rem);
+      line-height: 1.3;
       color: rgba(51, 36, 61, 0.88);
+      text-align: center;
     }
 
     .story-tag,
@@ -3912,15 +3934,16 @@
     }
 
     .function-poem {
-      margin-top: 0;
-      padding: 7px 9px;
+      grid-area: poem;
+      margin: 0;
+      padding: 8px 10px;
       border-left: 0;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.84);
       border: 1px solid rgba(122, 82, 168, 0.2);
       color: rgba(69, 32, 95, 0.84);
-      font-size: clamp(0.74rem, 2.9vmin, 0.84rem);
-      line-height: 1.2;
+      font-size: clamp(0.82rem, 3.1vmin, 0.94rem);
+      line-height: 1.24;
       text-align: center;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
     }
@@ -3928,15 +3951,18 @@
     .function-detail-stack {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: auto auto;
       grid-template-areas:
         "date time"
         "venue venue";
-      gap: 6px;
+      gap: 9px;
       min-width: 0;
       align-items: stretch;
-      align-content: stretch;
-      height: 100%;
-      margin-top: 1px;
+      align-content: start;
+      align-self: start;
+      height: auto;
+      margin-top: 2px;
+      padding: 0 2px 0 0;
     }
 
     .function-info-panel {
@@ -3961,12 +3987,12 @@
       padding: 9px 9px;
       border-radius: 16px;
       align-content: center;
-      min-height: 74px;
+      min-height: 68px;
     }
 
     .function-info-panel--time {
       grid-area: time;
-      min-height: 74px;
+      min-height: 68px;
       align-content: center;
       justify-items: center;
       gap: 4px;
@@ -3979,9 +4005,8 @@
       gap: 8px;
       align-items: start;
       text-align: left;
-      min-height: 84px;
-      padding-top: 10px;
-      padding-bottom: 10px;
+      min-height: 0;
+      padding: 10px 12px 11px;
     }
 
     .function-info-panel--venue svg {
@@ -3997,12 +4022,12 @@
     }
 
     .function-day {
-      font-size: clamp(1.96rem, 7.8vmin, 2.34rem);
+      font-size: clamp(2.12rem, 8.2vmin, 2.55rem);
       color: var(--plum-deep);
     }
 
     .function-month {
-      font-size: 1.12rem;
+      font-size: 1.2rem;
     }
 
     .function-year,
@@ -4035,12 +4060,12 @@
     }
 
     .function-info-label {
-      font-size: 0.54rem;
+      font-size: 0.58rem;
     }
 
     .function-info-value {
-      font-size: 0.87rem;
-      line-height: 1.22;
+      font-size: 0.94rem;
+      line-height: 1.24;
     }
 
     .function-info-panel--time .function-info-value {
@@ -4048,7 +4073,7 @@
     }
 
     .function-info-address {
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       color: rgba(51, 36, 61, 0.74);
     }
 
@@ -4305,8 +4330,8 @@
       }
 
       .function-face {
-        padding: 10px 10px 8px;
-        gap: 6px;
+        padding: 10px 14px 10px;
+        gap: 8px;
       }
 
       .function-head {
@@ -4316,16 +4341,18 @@
 
       .function-main {
         grid-template-columns: 82px minmax(0, 1fr);
-        gap: 7px;
+        column-gap: 7px;
+        row-gap: 6px;
       }
 
       .function-pose {
         max-height: 126px;
+        margin-top: 0;
         border-radius: 14px;
       }
 
       .function-title {
-        font-size: clamp(1.18rem, 4.7vmin, 1.42rem);
+        font-size: clamp(1.28rem, 5vmin, 1.54rem);
       }
 
       .function-step {
@@ -4333,22 +4360,22 @@
       }
 
       .function-copy {
-        font-size: 0.82rem;
-        line-height: 1.22;
+        font-size: 0.9rem;
+        line-height: 1.26;
       }
 
       .function-poem {
-        padding: 6px 8px;
-        font-size: 0.71rem;
-        line-height: 1.16;
+        padding: 7px 9px;
+        font-size: 0.78rem;
+        line-height: 1.2;
       }
 
       .function-day {
-        font-size: 1.86rem;
+        font-size: 2rem;
       }
 
       .function-month {
-        font-size: 0.94rem;
+        font-size: 1rem;
       }
 
       .function-year,
@@ -4357,16 +4384,17 @@
       }
 
       .function-info-value {
-        font-size: 0.75rem;
-        line-height: 1.12;
+        font-size: 0.8rem;
+        line-height: 1.16;
       }
 
       .function-info-label {
-        font-size: 0.47rem;
+        font-size: 0.5rem;
       }
 
       .function-detail-stack {
         gap: 5px;
+        padding-right: 2px;
       }
 
       .function-info-panel,
@@ -4377,6 +4405,15 @@
       .function-date-card,
       .function-info-panel--time {
         min-height: 58px;
+      }
+
+      .function-info-panel--venue {
+        min-height: 0;
+        padding: 8px 10px 9px;
+      }
+
+      .function-info-address {
+        -webkit-line-clamp: 3;
       }
 
       .story-stage .story-stage-footer {
@@ -4685,31 +4722,6 @@
         </footer>
       </section>
 
-      <!-- STORY -->
-      <section class="screen" data-screen="story" aria-label="विवाह कार्यक्रम">
-        <header class="topbar">
-          <div class="brand-mark">
-            <img src="ps-logo.png" alt="" class="ps-logo ps-logo--crest" width="28" height="28" />
-            <span class="story-hashtag" id="storyMonogram">#Poorvesh</span>
-          </div>
-          <div class="progress" aria-hidden="true"></div>
-        </header>
-        <div class="center">
-          <div class="story-intro-head">
-            <p class="story-eyebrow" id="storyEyebrow">विवाह सोहळे</p>
-          </div>
-          <div class="story-hub" id="storyHub">
-            <p class="story-hub-sub">मुहूर्त &middot; मेहेंदी &middot; हळद &middot; संगीत</p>
-            <div class="story-tabs" id="storyTabs" role="tablist" aria-label="विवाह कार्यक्रम"></div>
-            <article class="story-stage" id="storyStage" role="tabpanel" aria-live="polite"></article>
-          </div>
-        </div>
-        <footer class="footer-actions">
-          <button class="btn secondary icon-btn" type="button" data-prev aria-label="मागील"><svg class="icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></svg></button>
-          <button class="btn gold" type="button" data-next>विवाह दिनांक <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
-        </footer>
-      </section>
-
       <!-- DATE -->
       <section class="screen" data-screen="date" aria-label="मंगल दिनांक">
         <header class="topbar">
@@ -4742,11 +4754,11 @@
                     <p class="date-year-line" id="dateYear">२०२६</p>
                   </div>
                   <span class="date-ornament" aria-hidden="true"></span>
-                  <p class="date-time" id="dateSmall">दुपारी १२:३० वाजल्यापासून</p>
+                  <p class="date-time" id="dateSmall">दुपारी १२:२१ वाजता</p>
                   <p class="date-poem" id="datePoem">या सुवर्णक्षणी दोन वाटा एकरूप होत आहेत.</p>
                 </div>
               </div>
-              <canvas id="scratchCanvas" aria-label="विवाह दिनांक पाहण्यासाठी सोनेरी पत्रा खरवडा"></canvas>
+              <canvas id="scratchCanvas" aria-label="Scratch करून विवाह दिनांक पहा"></canvas>
               <div class="scratch-corners" aria-hidden="true">
                 <span></span><span></span><span></span><span></span>
               </div>
@@ -4755,16 +4767,16 @@
                   <path d="M8 4c-2 3-2 7 0 10M16 4c2 3 2 7 0 10" stroke-linecap="round"/>
                   <path d="M12 14v6M9 20h6" stroke-linecap="round"/>
                 </svg>
-                <span>येथे खरवडा</span>
+                <span>Scratch here</span>
               </div>
               <div class="scratch-progress" id="scratchProgress" aria-hidden="true"><i></i></div>
             </article>
-            <div class="mini-panel" id="scratchNote">सोनेरी पत्रा अलगद खरवडा; मंगल दिनांक उजळून येईल.</div>
+            <div class="mini-panel" id="scratchNote">Scratch करा; मंगल दिनांक उजळून येईल.</div>
           </div>
         </div>
         <footer class="footer-actions">
           <button class="btn secondary icon-btn" type="button" data-prev aria-label="मागील"><svg class="icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></svg></button>
-          <button class="btn" type="button" data-next>स्थळ पहा <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.2" fill="currentColor"/></svg></button>
+          <button class="btn is-locked" type="button" data-next data-scratch-next aria-disabled="true">स्थळ पहा <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.2" fill="currentColor"/></svg></button>
         </footer>
       </section>
 
@@ -4909,7 +4921,7 @@
         src: "marathi song.m4a",
         volume: 0.55
       },
-      weddingISO: "2026-07-04T12:30:00",
+      weddingISO: "2026-07-04T12:21:00",
       countdownISO: "2026-06-01T00:00:00",
       assets: {
         pose: "function-pose.png"
@@ -4931,7 +4943,7 @@
           day: "०१",
           month: "जून",
           year: "२०२६",
-          time: "",
+          time: "सकाळी ११:०० वाजता",
           venueName: "चैतन्य",
           venueAddress: "समर्थ वाडी, विवेकानंद विद्यालयाच्या मागे, त्रिमूर्ती कॉम्प्युटर्सच्या वर, यवतमाळ",
           venueMapUrl: "https://maps.app.goo.gl/hErJ9u3X9CHNnXkN6",
@@ -4996,7 +5008,7 @@
         suffix: "",
         month: "जुलै",
         year: "२०२६",
-        time: "दुपारी १२:३० वाजल्यापासून",
+        time: "दुपारी १२:२१ वाजता",
         poem: "या सुवर्णक्षणी दोन वाटा एकरूप होत आहेत."
       },
       venue: {
@@ -5030,6 +5042,7 @@
     const scratchProgress = document.getElementById("scratchProgress");
     const canvas = document.getElementById("scratchCanvas");
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    const scratchNextButton = document.querySelector("[data-scratch-next]");
     const phone = document.getElementById("phone");
 
     let current = 0;
@@ -5052,12 +5065,14 @@
     function applyContent() {
       document.getElementById("personOne").textContent = INVITE.couple.first;
       document.getElementById("personTwo").textContent = INVITE.couple.second;
-      document.getElementById("storyMonogram").textContent = INVITE.hashtag;
+      const storyMonogram = document.getElementById("storyMonogram");
+      if (storyMonogram) storyMonogram.textContent = INVITE.hashtag;
       document.getElementById("coverDate").textContent = INVITE.coverDate;
       document.getElementById("inviteTitle").textContent = INVITE.inviteTitle;
       document.getElementById("inviteLine").textContent = INVITE.invitationLine;
       document.getElementById("invitePoem").textContent = INVITE.invitationPoem;
-      document.getElementById("storyEyebrow").textContent = INVITE.storyEyebrow;
+      const storyEyebrow = document.getElementById("storyEyebrow");
+      if (storyEyebrow) storyEyebrow.textContent = INVITE.storyEyebrow;
       document.getElementById("dateLabel").textContent = INVITE.date.label;
       document.getElementById("dateWeekday").textContent = INVITE.date.weekday;
       document.getElementById("dateDay").textContent = INVITE.date.day;
@@ -5091,7 +5106,6 @@
       document.getElementById("calendarLink").href =
         `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calTitle}&dates=${fmt(start)}/${fmt(end)}&details=${calDetails}&location=${encodeURIComponent(INVITE.venue.address)}`;
 
-      buildStoryHub();
     }
 
     let storyIndex = 0;
@@ -5114,10 +5128,10 @@
               </div>
             </div>
             <div class="function-main">
+              <p class="function-copy">${escapeHtml(item.text)}</p>
+              <p class="function-poem">${escapeHtml(item.poem)}</p>
               <div class="function-pose" aria-hidden="true"><img src="${poseSrc}" alt="" /></div>
               <div class="function-summary">
-                <p class="function-copy">${escapeHtml(item.text)}</p>
-                <p class="function-poem">${escapeHtml(item.poem)}</p>
                 <div class="function-detail-stack">
                   <div class="function-date-card" aria-label="${escapeHtml(item.title)} दिनांक">
                     <span class="function-day">${escapeHtml(item.day)}</span>
@@ -5387,6 +5401,12 @@
       goTo(1);
     }
 
+    function setScratchGate(open) {
+      if (!scratchNextButton) return;
+      scratchNextButton.classList.toggle("is-locked", !open);
+      scratchNextButton.setAttribute("aria-disabled", open ? "false" : "true");
+    }
+
     function goTo(index) {
       const prev = current;
       current = Math.max(0, Math.min(index, screens.length - 1));
@@ -5524,6 +5544,15 @@
         else openEnvelope();
         return;
       }
+      if (screens[current]?.dataset.screen === "date" && !dateCompleted) {
+        setScratchGate(false);
+        if (scratchNote) {
+          scratchNote.classList.remove("revealed");
+          scratchNote.textContent = "स्थळ पाहण्यासाठी आधी Scratch पूर्ण करा.";
+        }
+        vibrate([8, 20, 8]);
+        return;
+      }
       goTo(current + 1);
     }
 
@@ -5603,6 +5632,7 @@
       if (scratchHint) scratchHint.removeAttribute("hidden");
       canvas.style.opacity = "1";
       canvas.style.pointerEvents = "auto";
+      setScratchGate(false);
       if (scratchProgress) scratchProgress.style.setProperty("--scratch-pct", "0%");
       scratchRevealChecks = 0;
 
@@ -5623,7 +5653,7 @@
       scratchCard.classList.add("scratch-started");
       if (scratchHint) scratchHint.setAttribute("hidden", "");
       if (scratchNote && !dateCompleted) {
-        scratchNote.textContent = "Lovely — a little more, and the auspicious moment will open.";
+        scratchNote.textContent = "छान — अजून थोडे Scratch करा, मंगल दिनांक उलगडेल.";
       }
     }
 
@@ -5713,8 +5743,9 @@
       canvas.style.pointerEvents = "none";
       clearAllFoil();
       updateScratchProgress(1);
+      setScratchGate(true);
       if (scratchNote) {
-        scratchNote.textContent = "✦ Date revealed — the celebration is calling ✦";
+        scratchNote.textContent = "✦ दिनांक उलगडला — आता स्थळ पाहूया ✦";
         scratchNote.classList.add("revealed");
       }
       vibrate([10, 30, 10]);
@@ -5851,12 +5882,13 @@
       setMusicUi?.(false);
       phone.classList.remove("music-ready");
       dateCompleted = false;
+      setScratchGate(false);
       document.getElementById("scratchNote").classList.remove("revealed");
       scratchCard.classList.remove("is-revealed", "is-scratching", "scratch-started");
       if (scratchHint) scratchHint.removeAttribute("hidden");
       if (scratchNote) {
         scratchNote.classList.remove("revealed");
-        scratchNote.textContent = "Gently scratch the gold foil to reveal the auspicious date.";
+        scratchNote.textContent = "Scratch करा; मंगल दिनांक उजळून येईल.";
       }
       document.getElementById("heartBtn").classList.remove("liked");
       blessingsMsg.textContent = "";
@@ -5884,13 +5916,7 @@
     });
 
     document.getElementById("shareBtn").addEventListener("click", async () => {
-      const functionLines = INVITE.story
-        .map((item) => {
-          const time = item.time ? `, ${item.time}` : "";
-          return `${item.title}: ${item.weekday}, ${item.day} ${item.month} ${item.year}${time} — ${item.venueName}`;
-        })
-        .join("\n");
-      const text = `${INVITE.couple.first} आणि ${INVITE.couple.second} — विवाह निमंत्रण\n\nकार्यक्रम:\n${functionLines}\n\nविवाह:\n${INVITE.date.weekday}, ${INVITE.date.day}${INVITE.date.suffix} ${INVITE.date.month} ${INVITE.date.year}, ${INVITE.date.time}\n${INVITE.venue.name}, ${INVITE.venue.address}`;
+      const text = `${INVITE.couple.first} आणि ${INVITE.couple.second} — विवाह निमंत्रण\n\nविवाह:\n${INVITE.date.weekday}, ${INVITE.date.day}${INVITE.date.suffix} ${INVITE.date.month} ${INVITE.date.year}, ${INVITE.date.time}\n${INVITE.venue.name}, ${INVITE.venue.address}`;
       try {
         if (navigator.share) await navigator.share({ title: "विवाह निमंत्रण", text, url: location.href });
         else await navigator.clipboard.writeText(text + "\n" + location.href);
